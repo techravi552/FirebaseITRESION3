@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #table{
+            width: 100%;
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+        }
+        tr{
+            text-align: center;
+       
+        }
+    </style>
+</head>
+<body>
+    <table id="table" border="1px">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+       
+    </table>
+</body>
+</html>
+<script>
+    table = document.getElementById("table")
+    fetch('https://userdata-179e0-default-rtdb.asia-southeast1.firebasedatabase.app/users.json')
+
+
+
+.then(response => response.json())
+.then((data) => {
+    const usersp = Object.entries(data)
+
+
+    let fusers = usersp.map(([id , user])=>({id ,...user}))
+    // console.log(fusers)
+
+    fusers.map((e)=>{
+        let tr=document.createElement("tr")
+        tr.innerHTML=`<td>${e.name}</td>
+            <td>${e.email}</td>`
+            table.append(tr)
+        console.log(e.name)
+    })
+})
+</script>
